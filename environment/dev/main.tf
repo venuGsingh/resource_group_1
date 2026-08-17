@@ -1,7 +1,7 @@
 
 
 module "resource_group" {
-  source   = "../../child_module/Azure_Resource_group"
+  source   = "../../child_module/Azure_resource_group"
   rgs_venu = var.rgs_venu
 }
 module "vnet_v" {
