@@ -24,7 +24,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-         run: terraform -chdir=resource_group_1/environment/dev init
+        run: terraform -chdir=resource_group_1/environment/dev init
 
       - name: Terraform Validate
         run: terraform -chdir=resource_group_1/environment/dev validate
