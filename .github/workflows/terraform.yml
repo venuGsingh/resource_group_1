@@ -10,10 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ARM_CLIENT_ID: "4c4abf9c-a298-49dd-8e9b-1f66a797c4ba"
-      ARM_CLIENT_SECRET: "29b66e2e-d5a5-4c85-9409-21685f8302a9"
-      ARM_SUBSCRIPTION_ID: "4fdd4243-800e-4476-9f63-e79964e24bcf"
-      ARM_TENANT_ID: "51406f99-b476-466f-bcde-eabd1322e10f"
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
 
     steps:
       - name: Checkout
@@ -23,10 +24,10 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform -chdir=environment/dev init
+         run: terraform -chdir=resource_group_1/environment/dev init
 
       - name: Terraform Validate
-        run: terraform -chdir=environment/dev validate
+        run: terraform -chdir=resource_group_1/environment/dev validate
 
       - name: Terraform Plan
-        run: terraform -chdir=environment/dev plan
+        run: terraform -chdir=resource_group_1/environment/dev plan
