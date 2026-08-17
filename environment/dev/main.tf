@@ -1,18 +1,18 @@
 
 
 module "resource_group" {
-  source   = "../child_module/Azure_Resource_group"
+  source   = "../../child_module/Azure_Resource_group"
   rgs_venu = var.rgs_venu
 }
 module "vnet_v" {
   depends_on = [module.resource_group]
-  source     = "../child_module/Azure_VNet"
+  source     = "../../child_module/Azure_VNet"
   VNetm      = var.VNetm
 
 }
 module "subnet" {
   depends_on = [module.vnet_v]
-  source     = "../child_module/Azure_subnet"
+  source     = "../../child_module/Azure_subnet"
   subnet_V   = var.subnet_v
 }
 module "public_ip" {

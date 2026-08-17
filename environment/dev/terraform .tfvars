@@ -48,12 +48,12 @@ subnet_v = {
 
 public_ip = {
 
-  public_ip1= {
-  name                = "bastionpip"
-  location            = "central india"
-  resource_group_name = "venu_rg_module"
-  allocation_method   = "Static"
-  sku                 = "Standard"
+  public_ip1 = {
+    name                = "bastionpip"
+    location            = "central india"
+    resource_group_name = "venu_rg_module"
+    allocation_method   = "Static"
+    sku                 = "Standard"
   }
 }
 # Bastion_host = {
