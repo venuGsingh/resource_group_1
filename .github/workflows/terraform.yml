@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
 
 jobs:
   terraform-plan:
@@ -15,19 +21,30 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
-
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Show Repository Structure
+        run: |
+          pwd
+          find . -maxdepth 3 -type f
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Terraform Format Check
+        working-directory: environment/dev
+        run: terraform fmt -check
+
       - name: Terraform Init
-        run: terraform -chdir=resource_group_1/environment/dev init
+        working-directory: environment/dev
+        run: terraform init -input=false
 
       - name: Terraform Validate
-        run: terraform -chdir=resource_group_1/environment/dev validate
+        working-directory: environment/dev
+        run: terraform validate
 
       - name: Terraform Plan
-        run: terraform -chdir=resource_group_1/environment/dev plan
+        working-directory: environment/dev
+        run: terraform plan -input=false -no-color
